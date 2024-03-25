@@ -11,13 +11,13 @@ export default function TheForm({ pixelId }) { // Accept pixelId as prop
 
   // Функция для проверки заполненности всех полей
   const isFormValid = () => {
-    return name.trim() !== '' && phone.trim() !== '' && nick.trim() !== '';
+    return name.trim() !== '' && phone.trim() !== '' ;
   };
 
   // Обновление состояния активности кнопки отправки при изменении любого из полей
   useEffect(() => {
     setIsSubmitDisabled(!isFormValid());
-  }, [name, phone, nick]);
+  }, [name, phone]);
 
   useEffect(() => {
     if (pixelId) {
