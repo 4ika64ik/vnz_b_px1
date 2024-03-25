@@ -64,18 +64,7 @@ export default function TheForm({ pixelId }) { // Accept pixelId as prop
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <div>
-            <label>
-              <p className="text-gray-700 font-semibold mt-3">Ник телеграма</p>
-            </label>
-            <input
-              type="text"
-              placeholder="Ник телеграма"
-              className="w-full border-2 border-gray-300 rounded-md px-3 py-2 mt-1 transition delay-75 duration-300 focus:outline-none focus:ring-2 ocus:ring-blue-400  focus:border-none md:w-80 "
-              value={nick}
-              onChange={(e) => setNick(e.target.value)}
-            />
-          </div>
+          
           <div className="mt-6">
             <label>
               <p className="text-gray-700 font-semibold">Телефон</p>
