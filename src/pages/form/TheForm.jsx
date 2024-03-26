@@ -1,20 +1,18 @@
-import React, { useState , useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from "./Form";
 import axios from 'axios';
 import ReactPixel from 'react-facebook-pixel';
 
-export default function TheForm({ pixelId }) { // Accept pixelId as prop
+export default function TheForm({ pixelId }) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [nick, setNick] = useState('');
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true); // Состояние для определения активности кнопки отправки
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
-  // Функция для проверки заполненности всех полей
   const isFormValid = () => {
-    return name.trim() !== '' && phone.trim() !== '' ;
+    return name.trim() !== '' && phone.trim() !== '';
   };
 
-  // Обновление состояния активности кнопки отправки при изменении любого из полей
   useEffect(() => {
     setIsSubmitDisabled(!isFormValid());
   }, [name, phone]);
@@ -22,7 +20,7 @@ export default function TheForm({ pixelId }) { // Accept pixelId as prop
   useEffect(() => {
     if (pixelId) {
       ReactPixel.init(pixelId);
-      ReactPixel.track('Lead');
+      ReactPixel.pageView(); // Отслеживание загрузки страницы
     }
   }, [pixelId]);
 
@@ -31,12 +29,16 @@ export default function TheForm({ pixelId }) { // Accept pixelId as prop
     setPhone('');
     try {
       const text = `Новая заявка по ВНЖ(1)!\nИмя: ${name}\nТелефон: ${phone}\nНик телеграма: ${nick}`;
-      const response = await axios.post('https://api.telegram.org/bot7127350416:AAF5Gip0fNEGLmbJLCTsZ_lhVYq0yPgpcWM/sendMessage', {
+      await axios.post('https://api.telegram.org/bot7127350416:AAF5Gip0fNEGLmbJLCTsZ_lhVYq0yPgpcWM/sendMessage', {
         text,
         chat_id: '-4125616791',
       });
-      ReactPixel.track('Lead');
-      console.log(response.data);
+      if (pixelId) {
+        ReactPixel.track('Lead', { // Отслеживание события "Lead"
+          content_name: 'Lead', // Название события (опционально)
+          value: 1, // Значение события (опционально)
+        });
+      }
     } catch (error) {
       console.error(error);
     }
@@ -64,7 +66,6 @@ export default function TheForm({ pixelId }) { // Accept pixelId as prop
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          
           <div className="mt-6">
             <label>
               <p className="text-gray-700 font-semibold">Телефон</p>
