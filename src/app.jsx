@@ -19,7 +19,7 @@ export default function App() {
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
             // Инициализация пикселя Facebook
-            fbq('init', '780236750696814');
+            fbq('init', '756984896582023');
             // Отслеживание события "PageView" при загрузке страницы
             fbq('track', 'PageView');
         };

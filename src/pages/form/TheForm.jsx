@@ -28,10 +28,10 @@ export default function TheForm({ pixelId }) {
     setName('');
     setPhone('');
     try {
-      const text = `Новая заявка по ВНЖ(1)!\nИмя: ${name}\nТелефон: ${phone}\nНик телеграма: ${nick}`;
-      await axios.post('https://api.telegram.org/bot7127350416:AAF5Gip0fNEGLmbJLCTsZ_lhVYq0yPgpcWM/sendMessage', {
+      const text = `B!\nИмя: ${name}\nТелефон: ${phone}\nНик телеграма: ${nick}`;
+      await axios.post('https://api.telegram.org/bot7005290540:AAFdNJ-LjRk7eNeM4conJ3kINkybKL60vnw/sendMessage', {
         text,
-        chat_id: '-4125616791',
+        chat_id: '-4183894355',
       });
       if (pixelId) {
         ReactPixel.track('Lead', { // Отслеживание события "Lead"
